@@ -1,7 +1,9 @@
 "use strict";
 
 class TicTacToeGame {
-    
+    //Takes in the size of the board (3x3 for 9 squares) and an array of plays 
+    //that would be used to represent their moves on the gameboard
+    //The game only supports a 3x3 board, 3 is the only valid size
     constructor(size, arrPlayers) {
         this._size = size; //game only supports a 3x3 board
         this._players = arrPlayers;
