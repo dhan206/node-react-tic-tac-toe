@@ -1,24 +1,12 @@
-'use strict';
+"use strict";
 
 var React = require('react');
-var ReactDOM = require('react-dom');
+var game = require("./game.js");
+var components = require("./components.js");
+var controller = require("./controller.js");
 
-var gameModel = require("./game"); //M
-// var gameController = require("./controller"); //C
+var View = components.GameInterface;
+var ticTacToeGame = new game.TicTacToeGame(3, ["X", "O"]);
+var gameController = new controller.GameController(ticTacToeGame, View);
 
-
-var Title = React.createClass({
-    render: function() {
-        return <h3>TicTacToe Game!</h3>;
-    }
-})
-
-var InformationBox = React.createClass({
-    render: function() {
-        
-    }
-})
-
-
-
-ReactDOM.render(<Title />, document.getElementById('content'));
+gameController.update();
