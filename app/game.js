@@ -1,8 +1,9 @@
 "use strict";
 
 class TicTacToeGame {
+    
     constructor(size, arrPlayers) {
-        this._size = size;
+        this._size = size; //game only supports a 3x3 board
         this._players = arrPlayers;
         this._turn = Math.floor(Math.random() * this._players.length); //randomly select a player to start
         
@@ -33,6 +34,10 @@ class TicTacToeGame {
         return this._turn;
     }
     
+    set turn(response) {
+        this._turn = response;
+    }
+    
     get gameStats() {
         return this._gameStats;
     }
@@ -45,6 +50,7 @@ class TicTacToeGame {
         return this._players;
     }
     
+    //reset the gamestate
     reset() {
         //board with empty cells, used to model a new board state
         this._emptyBoard = [];
@@ -58,6 +64,7 @@ class TicTacToeGame {
         this._winner = undefined;
     }
     
+    //returns whether a win or tie has occured, updates the gameStats accordingly
     winOrTie() {
         var board = this._gameboard;
         console.log(this._gameStats);
@@ -114,24 +121,20 @@ class TicTacToeGame {
             this._gameStats["tie"]++;
             return true;
             
-        } else {
+        } else { //no win or tie, game is ongoing
             return false;
         }
     }
     
+    //places the move into a designated cell
      move(cell) {
-        if (this._turn !== undefined) { //game is still playing
-            if (this._gameboard[cell] === undefined) { //cell is empty
-                this._gameboard[cell] = this._players[this._turn]; //place move
-                if (!this.winOrTie()) { //game is ongoing
-                    this._turn = (this._turn == 0 ? 1 : 0); //switch player
-                } else {
-                    this._turn = undefined;
-                }
-            }
+        this._gameboard[cell] = this._players[this._turn]; //place move
+        if(!this.winOrTie()) { //game is ongoing
+            this._turn = (this._turn == 0 ? 1 : 0); //switch players
+        } else {
+            this._turn = undefined;
         }
-        console.log(this._gameboard, this._winner);
     }
 }
 
-module.exports.TicTacToeGame = TicTacToeGame;
+module.exports.TicTacToeGame = TicTacToeGame; //Exports the TicTacToeGame

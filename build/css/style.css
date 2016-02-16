@@ -1,10 +1,36 @@
-
-.gameButton {
-  width: 80px;
-  height: 80px;
+body {
+    text-align: center;
+    background-color: tan;
 }
 
-* make buttons bigger font **/
-.btn-group-lg>.btn, .btn-lg, .btn {
-  font-size: 60px !important;
+h1 {
+    font-size: 60px;
+}
+
+.infoBox {
+    height: 40px;
+    padding: 25px;
+    font-size: 35px;
+}
+
+.gameButton {
+  width: 150px;
+  height: 150px;
+  font-size: 80px;
+}
+
+#scoreboard {
+    font-size: 20px;
+}
+
+#turn {
+    color: red;
+}
+
+footer {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
 }

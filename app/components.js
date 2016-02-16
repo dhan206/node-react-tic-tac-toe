@@ -3,44 +3,49 @@
 var React = require('react');
 var ReactBootstrap = require('react-bootstrap');
 
+//The TicTacToe game title
 var Title = React.createClass({
     render: function() {
-        return <h3>#-Tic-Tac-Toe-#</h3>;
+        return <h1># Tic-Tac-Toe #</h1>;
     }
 })
 
+//Game information box that displays who's turn it is, whether someone has won or if the game is tied
 var InformationBox = React.createClass({
     
     handleClick: function() {
-        this.props.controller.playAgain();
+        this.props.controller.playAgain(); //delegates the interaction to the controller
     },
     
     render: function() {
         var Button  = ReactBootstrap.Button;
         var game = this.props.model;
-        if (game.turn !== undefined) {
+        if (game.turn !== undefined) { //game is still playing
             return(
-                <h4>Your turn, player &#34;{game.players[game.turn]}&#34;</h4>
-            )
-        } else if (game.winner !== undefined) {
-            return (
-                <div>
-                    <h4>Player &#34;{game.winner}&#34; has won! <Button bsStyle="warning" onClick={this.handleClick}>Play Again</Button></h4>
+                <div className="infoBox">
+                    <p>Your turn, Player &#39;<span id="turn">{game.players[game.turn]}</span>&#39;</p>
                 </div>
             )
-        } else {
+        } else if (game.winner !== undefined) { //there is a winner
             return (
-                <div>
-                    <h4>Tie Game! <Button bsStyle="warning" onClick={this.handleClick}>Play Again</Button></h4>
+                <div className="infoBox">
+                    <p>Player &#39;{game.winner}&#39; has won! <Button bsStyle="info" className="btn-lg" onClick={this.handleClick}>Play Again</Button></p>
+                </div>
+            )
+        } else { //the game has tied
+            return (
+                <div className="infoBox">
+                    <p>Tie Game! <Button bsStyle="info" className="btn-lg" onClick={this.handleClick}>Play Again</Button></p>	
                 </div>
             )
         }
     }
 })
 
+//The button components for the Gameboard
 var GameButton = React.createClass({ 
     handleClick: function() {
-        this.props.controller.makeMove(this.props.id);
+        this.props.controller.makeMove(this.props.id); //delegates the interaction to the controller
     },
     
     render: function() {
@@ -51,49 +56,65 @@ var GameButton = React.createClass({
     }
 })
 
+//The Gameboard that displays the grid of GameButtons
 var Gameboard = React.createClass({
     render: function() {
         var contrProp = this.props.controller;
         var modelProp = this.props.model;
-        var buttonList = this.props.model.gameboard.map(function(cell, i) {
-            return <GameButton id={i} key={i} model={modelProp} controller={contrProp}/>
-        })
         
         return(
             <div id="gameboard">
-                { buttonList }
-            </div>
+                <div id="row1">
+                    <GameButton id={0} key={0} model={modelProp} controller={contrProp}/>
+                    <GameButton id={1} key={1} model={modelProp} controller={contrProp}/>
+                    <GameButton id={2} key={2} model={modelProp} controller={contrProp}/>
+                </div>
+                <div id="row=2">
+                    <GameButton id={3} key={3} model={modelProp} controller={contrProp}/>
+                    <GameButton id={4} key={4} model={modelProp} controller={contrProp}/>
+                    <GameButton id={5} key={5} model={modelProp} controller={contrProp}/>
+                </div>
+                <div id="row3">
+                    <GameButton id={6} key={6} model={modelProp} controller={contrProp}/>
+                    <GameButton id={7} key={7} model={modelProp} controller={contrProp}/>
+                    <GameButton id={8} key={8} model={modelProp} controller={contrProp}/>
+                </div>
+            </div> 
         )
     }
 })
 
+//The Scoreboard that displays the gameStats
 var Scoreboard = React.createClass({
     render: function() {
         var players = this.props.model.players;
         var score = this.props.model.gameStats;
         console.log(score);
         return(
-            <div>
+            <div id="scoreboard">
                 <strong>SCORE </strong>
-                <span>Player {players[0]} : {score[0]} | </span>
-                <span>Player {players[1]} : {score[1]} | </span>
-                <span>Ties : {score["tie"]}</span>
+                <em>
+                <span>Player &#39;{players[0]}&#39; : <strong>{score[0]}</strong> | </span>
+                <span>Player &#39;{players[1]}&#39; : <strong>{score[1]}</strong> | </span>
+                <span>Ties : <strong>{score["tie"]}</strong></span>
+                </em>
             </div>
         )
     }
 })
 
+//The Gameinterface that displays all of the components of the game
 var GameInterface = React.createClass({
     render: function() {
        return(
             <div>
                 <Title />
-                <InformationBox model={this.props.model} controller={this.props.controller}/>
                 <Gameboard model={this.props.model} controller={this.props.controller}/>
                 <Scoreboard model={this.props.model} />
+                 <InformationBox model={this.props.model} controller={this.props.controller}/>
             </div>
        )
     }
 })
 
-module.exports.GameInterface = GameInterface;
+module.exports.GameInterface = GameInterface; //Exports the GameInterface
