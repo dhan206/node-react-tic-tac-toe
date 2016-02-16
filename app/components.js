@@ -5,7 +5,7 @@ var ReactBootstrap = require('react-bootstrap');
 
 var Title = React.createClass({
     render: function() {
-        return <h3># Tic Tac Toe Game #</h3>;
+        return <h3>#-Tic-Tac-Toe-#</h3>;
     }
 })
 

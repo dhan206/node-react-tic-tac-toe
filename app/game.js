@@ -62,51 +62,51 @@ class TicTacToeGame {
         var board = this._gameboard;
         console.log(this._gameStats);
         if (board[0] == board[1] && board[1] == board[2] && board[0] !== undefined) { //top horizonal match
-        
+
             this._winner = board[0];
-            this._gameStats[this._players.indexOf[board[0]]]++;
+            this._gameStats[this._players.indexOf(board[0])]++;
             return true;
             
         } else if (board[0] == board[4] && board[4] == board[8] && board[0] !== undefined) { //diagonal, left to right match
         
             this._winner = board[0];
-            this._gameStats[this._players.indexOf[board[0]]]++;
+            this._gameStats[this._players.indexOf(board[0])]++;
             return true;
             
         } else if (board[0] == board[3] && board[3] == board[6] && board[0] !== undefined) { //left veritcal match
         
             this._winner = board[0];
-            this._gameStats[this._players.indexOf[board[0]]]++;
+            this._gameStats[this._players.indexOf(board[0])]++;
             return true;
             
         } else if (board[1] == board[4] && board[4] == board[7] && board[1] !== undefined) { //middle vertical match
         
             this._winner = board[1];
-            this._gameStats[this._players.indexOf[board[1]]]++;
+            this._gameStats[this._players.indexOf(board[1])]++;
             return true;
             
         } else if (board[2] == board[5] && board[5] == board[8] && board[2] !== undefined) { //right vertical match
         
             this._winner = board[2];
-            this._gameStats[this._players.indexOf[board[2]]]++;
+            this._gameStats[this._players.indexOf(board[2])]++;
             return true;
             
         } else if (board[2] == board[4] && board[4] == board[6] && board[2] !== undefined) { //diagonal, right to left match
         
             this._winner = board[2];
-            this._gameStats[this._players.indexOf[board[2]]]++;
+            this._gameStats[this._players.indexOf(board[2])]++;
             return true;
             
         } else if (board[3] == board[4] && board[4] == board[5] && board[3] !== undefined) { //middle horizonal match
         
             this._winner = board[3];
-            this._gameStats[this._players.indexOf[board[3]]]++;
+            this._gameStats[this._players.indexOf(board[3])]++;
             return true;
             
         } else if (board[6] == board[7] && board[7] == board[8] && board[6] !== undefined) { //bottom row match
         
             this._winner = board[6];
-            this._gameStats[this._players.indexOf[board[6]]]++;
+            this._gameStats[this._players.indexOf(board[6])]++;
             return true;
             
         } else if (this._gameboard.indexOf(undefined) == -1) { //board is full with no matches
@@ -120,16 +120,11 @@ class TicTacToeGame {
     }
     
      move(cell) {
-        console.log(this._turn);
         if (this._turn !== undefined) { //game is still playing
-            console.log("game move");
             if (this._gameboard[cell] === undefined) { //cell is empty
-                console.log("place");
                 this._gameboard[cell] = this._players[this._turn]; //place move
-                console.log(this.winOrTie());
                 if (!this.winOrTie()) { //game is ongoing
                     this._turn = (this._turn == 0 ? 1 : 0); //switch player
-                    console.log("switch turns");
                 } else {
                     this._turn = undefined;
                 }
