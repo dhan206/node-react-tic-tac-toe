@@ -29,7 +29,7 @@ var InformationBox = React.createClass({
         } else if (game.winner !== undefined) { //there is a winner
             return (
                 <div className="infoBox">
-                    <p>Player &#39;{game.winner}&#39; has won! <Button bsStyle="info" className="btn-lg" onClick={this.handleClick}>Play Again</Button></p>
+                    <p>Player &#39;<span id="turn">{game.winner}</span>&#39; has won! <Button bsStyle="info" className="btn-lg" onClick={this.handleClick}>Play Again</Button></p>
                 </div>
             )
         } else { //the game has tied
